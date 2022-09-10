@@ -1,0 +1,3 @@
+# The directory of local models
+/model-downloader/bodypix/*
+!/model-downloader/bodypix/README.md

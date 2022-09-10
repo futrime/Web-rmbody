@@ -1,0 +1,66 @@
+<!--
+Copyright 2020 Zijian Zhang
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<title>演示：视频人像抹除 - 在各种背景环境中抹除人像</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="Zijian Zhang">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css">
+
+</head>  
+<body class="py-5">
+
+    
+<header class="w-75 m-auto"> 
+<h1>演示：视频人像抹除 - 在各种背景环境中抹除人像</h1>
+<h2>运用机器学习在复杂背景中抹除人像</h2>
+<p>
+Google研发了一个人像识别模型BodyPix，可以实时地将视频中所有人像标记出来。正如《三体》中的「思想钢印」，如果我们给这个模型的结果一个「+」号，那就是把每个人识别出来，但是如果给个「-」号，那么就可以把这些人从背景中抹去。
+</p>
+<p>
+在这个项目中，算法根据模型得出的结果，实时地将没有人像的部分写入缓冲区，并且在具有人像的地方使用缓存区中相同位置的数据替代。因此要求视频中的场景必须静止（建议摄像头固定不动），并且所有背景环境必须在一开始的时候没有被人像遮住。
+</p>
+<p>
+具体体验效果依赖于设备性能，我在我的手机Redmi K20 Pro(Snapdragon 855, 6GB RAM)上进行测试，自我感觉能够较为流畅地使用（20-25 FPS）；但是在iPad mini 2(Apple A7, 1GB RAM)上进行测试就发现就难以正常使用（2-3 FPS）。在绝大部分PC上运行应该没问题。
+</p>
+<p>
+该项目尚处于实验阶段，效果可能并不佳。关于本项目的更多内容，请参考 <a href="https://gitee.com/futrime/Web-rmbody/">本项目Gitee仓库</a>。
+</p>
+<h2>使用方法</h2>
+<p>请等待约30秒直至「开始」按钮可以点击，然后点击「开始」按钮。请允许使用您的摄像头，我保证你的视频数据不会被上传到任何服务器。</p>
+<p>请尽量保持摄像头稳定不动，建议固定。请站在距离摄像头3米以外尝试走动，你将会从下面第二个画面中逐渐消失。</p>
+</header>
+
+
+<article id="demos" class="w-75 mx-auto mt-5 invisible">
+<div>
+	<button id="webcamButton" class="btn btn-lg btn-outline-dark">开始</button>
+</div>
+<div id="liveView" class="webcam">
+	<video id="webcam" class="w-100 mh-100" autoplay></video>
+	<div id="fps" class="display-4 text-secondary"></div>
+</div>
+</article>
+
+<script src="https://cdn.jsdelivr.net/combine/npm/jquery@3,npm/popper.js@1,npm/bootstrap@4/dist/js/bootstrap.min.js,npm/@tensorflow/tfjs@1,npm/@tensorflow-models/body-pix@2"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
